@@ -8,32 +8,32 @@ projects: []
 :icons: font
 :source-highlighter: prettify
 :project_id: gs-gradle
-This guide walks you through using Gradle to build a simple Java project.
+本指南引导您通过使用Gradle来创建一个简单的java项目。
 
-== What you'll build
+== 你将构建什么
 
-You'll create a simple app and then build it using Gradle.
-
-
-== What you'll need
-
- - About 15 minutes
- - A favorite text editor or IDE
- - {jdk}[JDK 6] or later
+你将创建一个简单的应用然后使用Gradle构建它。
 
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
+== 你需要什么
+
+ - 大概15分钟
+ - 一个你喜欢的文本编辑器或IDE
+ - {jdk}[JDK 6] 或更新的版本
+
+
+include::https://raw.githubusercontent.com/webGoBetter/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
 
 [[scratch]]
-== Set up the project
+== 创建一个项目
 
-First you set up a Java project for Gradle to build. To keep the focus on Gradle, make the project as simple as possible for now.
+首先你需要建立一个用来Gradle构建的Java项目。为了把焦点集中在Gradle，我们现在使项目尽可能简单。
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/create_directory_structure_hello.adoc[]
+include::https://raw.githubusercontent.com/webGoBetter/getting-started-macros/master/create_directory_structure_hello.adoc[]
 
 
-Within the `src/main/java/hello` directory, you can create any Java classes you want. For simplicity's sake and for consistency with the rest of this guide, Spring recommends that you create two classes: `HelloWorld.java` and `Greeter.java`.
+在 `src/main/java/hello` 目录下, 你能创建一个你想要的Java类。为了保持与本指南其余部分的一致性，创建这两个类: `HelloWorld.java` 和 `Greeter.java`.
 
 `src/main/java/hello/HelloWorld.java`
 [source,java]
@@ -49,9 +49,9 @@ include::initial/src/main/java/hello/Greeter.java[]
 
 
 [[initial]]
-== Install Gradle
+== 安装Gradle
 
-Now that you have a project that you can build with Gradle, you can install Gradle.
+现在，你已经为Gradle构建准备了一个项目，下一步就是安装Gradle。
 
 It's highly recommended to use an installer:
 * http://sdkman.io/
@@ -158,7 +158,7 @@ The reports folder should contain a report of running unit tests on the project.
 The libs folder should contain a JAR file that is named after the project's folder. Further down, you'll see how you can specify the name of the JAR and its version.
 
 
-== Declare dependencies
+== 声明依赖
 
 The simple Hello World sample is completely self-contained and does not depend on any additional libraries. Most applications, however, depend on external libraries to handle common and/or complex functionality.
 
@@ -317,14 +317,14 @@ include::complete/build.gradle[]
 NOTE: There are many start/end comments embedded here. This makes it possible to extract bits of the build file into this guide for the detailed explanations above. You don't need
 them in your production build file.
 
-== Summary
+== 总结
 
 Congratulations! You have now created a simple yet effective Gradle build file for building Java projects.
 
-== See Also
+== 参考
 
 The following guide may also be helpful:
 
-* https://spring.io/guides/gs/maven/[Building Java Projects with Maven]
+* http://knos.top/guides/gs/maven/[使用Maven构建Java项目]
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
+include::https://raw.githubusercontent.com/webGoBetter/getting-started-macros/master/footer.adoc[]
