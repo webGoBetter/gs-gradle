@@ -302,11 +302,9 @@ BUILD SUCCESSFUL
 Total time: 3.798 secs
 ----
 
-To bundle up dependencies requires more thought. For example, if we were building a WAR file, a format commonly associated with packing in 3rd party dependencies, we could use gradle's
-http://www.gradle.org/docs/current/userguide/war_plugin.html[WAR plugin]. If you are using Spring Boot and want a runnable JAR file, the http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-gradle[spring-boot-gradle-plugin] is quite handy. At this stage, gradle doesn't know enough about your system
-to make a choice. But for now, this should be enough to get started using gradle.
+捆绑依赖关系需要更多的思考。例如，如果我们构建一个WAR文件，一种打包第三方依赖相关的常见格式，我们可以使用Gradle的 http://www.gradle.org/docs/current/userguide/war_plugin.html[WAR 插件]。如果你用的是Spring Boot并想要一个可运行的JAR文件， http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-gradle[spring-boot-gradle-plugin]是很方便的。在这个阶段，Gradle不太了解你的系统作出选择。但现在，这应该足以开始使用Gradle。
 
-To wrap things up for this guide, here is the completed `build.gradle` file:
+将这个指南的东西包装起来，这是完整的 `build.gradle` 文件：
 
 `build.gradle`
 [source,gradle]
@@ -314,8 +312,7 @@ To wrap things up for this guide, here is the completed `build.gradle` file:
 include::complete/build.gradle[]
 ----
 
-NOTE: There are many start/end comments embedded here. This makes it possible to extract bits of the build file into this guide for the detailed explanations above. You don't need
-them in your production build file.
+NOTE: 这里有许多嵌入的开始/结束的注释。这使得可以将构建文件的一些信息提取到本指南中，以获得上面的详细解释。你不需要它们出现您的产品的构建文件中。
 
 == 总结
 
