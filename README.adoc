@@ -125,46 +125,46 @@ Total time: 3.077 secs
 说到添加插件，下一步你添加一个插件，启用基本的java构建功能。
 
 
-== Build Java code
-Starting simple, create a very basic `build.gradle` file in the <project folder> you created at the beginning of this guide. Give it just just one line:
+== 构建Java代码
+从简单的开始，在本指南开始的时候你创建的 <project folder> 文件夹下创建一个非常基本的 `build.gradle` 文件。给它一条线：
 
 [source,groovy]
 ----
 include::initial/build.gradle[]
 ----
 
-This single line in the build configuration brings a significant amount of power. Run **gradle tasks** again, and you see new tasks added to the list, including tasks for building the project, creating JavaDoc, and running tests.
+在构建配置里的这一行带来了大量的能力。再次运行 **gradle tasks** ，你看新任务添加到列表中，包括构建工程，创建JavaDoc和运行测试代码。
 
-You'll use the **gradle build** task frequently. This task compiles, tests, and assembles the code into a JAR file. You can run it like this:
+你会频繁地使用 **gradle build** 任务。这项任务编译，测试，组装代码成一个JAR文件。你可以像这样运行它：
 
 ----
 gradle build
 ----
 
-After a few seconds, "BUILD SUCCESSFUL" indicates that the build has completed.
+几秒钟后，"BUILD SUCCESSFUL" 表明构建已完成。
 
-To see the results of the build effort, take a look in the _build_ folder. Therein you'll find several directories, including these three notable folders:
+看到构建影响的结果，到 _build_ 文件夹看看。在其中你会发现几个目录，包括这三个著名的文件夹：
 
-* _classes_. The project's compiled .class files.
-* _reports_. Reports produced by the build (such as test reports).
-* _libs_. Assembled project libraries (usually JAR and/or WAR files).
+* _classes_. 该项目编译的类文件。
+* _reports_. 建立产生的报告（如测试报告）。
+* _libs_. 组装项目库（通常 JAR 和/或 WAR 文件）。
 
-The classes folder has .class files that are generated from compiling the Java code. Specifically, you should find HelloWorld.class and Greeter.class.
+类文件夹包含了从java代码编译生成的 .class 文件。具体来说，你应该找到HelloWorld.class和Greeter.class。
 
-At this point, the project doesn't have any library dependencies, so there's nothing in the *dependency_cache* folder.
+在现在，该项目没有任何依赖库，所以没有 *dependency_cache* 文件夹。
 
-The reports folder should contain a report of running unit tests on the project. Because the project doesn't yet have any unit tests, that report will be uninteresting.
+报告文件夹应该包含一个对项目运行单元测试的报告。因为项目没有任何的单元测试，报告将无聊的。
 
-The libs folder should contain a JAR file that is named after the project's folder. Further down, you'll see how you can specify the name of the JAR and its version.
+libs文件夹应该包含一个一项目的文件夹命名的JAR文件。再往下，你会看到你可以指定的JAR和它的版本名称。
 
 
 == 声明依赖
 
-The simple Hello World sample is completely self-contained and does not depend on any additional libraries. Most applications, however, depend on external libraries to handle common and/or complex functionality.
+简单的Hello World示例是完全自包含的，不依赖于任何额外的库。然而，大多数应用程序依赖于外部库来处理通用的和复杂的功能。
 
-For example, suppose that in addition to saying "Hello World!", you want the application to print the current date and time. You could use the date and time facilities in the native Java libraries, but you can make things more interesting by using the Joda Time libraries.
+例如，假设除了说 "Hello World!" ，您希望应用程序打印当前日期和时间。虽然你可以在本地的java库使用日期和时间的工具，你可以使用Joda Time 的库让事情更有趣。
 
-First, change HelloWorld.java to look like this:
+首先，将helloworld.java改得看起来像这样：
 
 [source,java]
 ----
@@ -183,54 +183,54 @@ public class HelloWorld {
 }
 ----
 
-Here `HelloWorld` uses Joda Time's `LocalTime` class to get and print the current time.
+这里 `HelloWorld` 用Joda Time的 `LocalTime` 类来获取和打印当前时间。
 
-If you ran `gradle build` to build the project now, the build would fail because you have not declared Joda Time as a compile dependency in the build.
+如果你运行 `gradle build` 构建项目，因为你没有在构建中声明Joda Time作为编译依赖，构建会失败。
 
-For starters, you need to add a source for 3rd party libraries.
+首先，您需要为第三方库添加一个源。
 
 [source,groovy]
 ----
 include::complete/build.gradle[tag=repositories]
 ----
 
-The `repositories` block indicates that the build should resolve its dependencies from the Maven Central repository. Gradle leans heavily on many conventions and facilities established by the Maven build tool, including the option of using Maven Central as a source of library dependencies.
+`repositories` 块表明构建应从Maven的中央存储库解析的依赖关系。Gradle非常依赖由Maven构建工具提供的许多约定和工具，包括选择使用Maven的中央仓库作为一个依赖库源。
 
-Now that we're ready for 3rd party libraries, let's declare some.
+现在我们已经准备好了第三方库，让我们声明一些。
 
 [source,groovy]
 ----
 include::complete/build.gradle[tag=dependencies]
 ----
 
-With the `dependencies` block, you declare a single dependency for Joda Time. Specifically, you're asking for (reading right to left) version 2.2 of the joda-time library, in the joda-time group.
+在 `dependencies` 块中，你声明Joda-Time作为一个依赖。具体来说，你要求（阅读从右到左）2.2版的joda-time库，在joda-time组。
 
-Another thing to note about this dependency is that it is a `compile` dependency, indicating that it should be available during compile-time (and if you were building a WAR file, included in the /WEB-INF/libs folder of the WAR). Other notable types of dependencies include:
+另一个关于这种依赖关系需要注意的是，这是一个 `compile` 依赖性，他们应该可以在编译时有效的（如果你正在建立一个 WAR 的文件，应该包含在WAR的 _/WEB-INF/libs_ 的文件夹里）。其他值得注意的依赖类型包括：
 
-* `providedCompile`. Required dependencies for compiling the project code, but that will be provided at runtime by a container running the code (for example, the Java Servlet API).
-* `testCompile`. Dependencies used for compiling and running tests, but not required for building or running the project's runtime code.
+* `providedCompile`. 是编制项目代码所需的依赖，但会在运行代码的容器的运行时（runtime）提供（例如，Java Servlet API）。
+* `testCompile`. 编译和运行测试所需的依赖, 但是不是构建或者运行项目运行时代码所需的。
 
-Finally, let's specify the name for our JAR artifact.
+最后，让我们指定JAR工件的名称。
 
 [source,groovy]
 ----
 include::complete/build.gradle[tag=jar]
 ----
 
-The `jar` block specifies how the JAR file will be named. In this case, it will render `gs-gradle-0.1.0.jar`.
+`jar` 块指定JAR文件将如何命名。在这种情况下，它会使用 `gs-gradle-0.1.0.jar` 。
 
-Now if you run `gradle build`, Gradle should resolve the Joda Time dependency from the Maven Central repository and the build will succeed.
+现在，如果你运行 `gradle build` ，Gradle应该从Gradle的中央存储库解析到Joda Time的依赖，构建将会成功。
 
 
-== Build your project with Gradle Wrapper
+== Gradle Wrapper(包装器)编译你的项目
 
-The Gradle Wrapper is the preferred way of starting a Gradle build. It consists of a batch script for Windows and a shell script for OS X and Linux. These scripts allow you to run a Gradle build without requiring that Gradle be installed on your system. This used to be something added to your build file, but it's been folded into Gradle, so there is no longer any need. Instead, you simply use the following command.
+Gradle Wrapper是开始Gradle构建的首选方式。它包括一个Windows的批处理脚本和一个用于OS X和Linux的shell脚本。这些脚本允许你运行一个Gradle构建而不需要在你的系统上安装Gradle。这是添加到你构建文件的一些东西，但它被包含到Gradle里，所以不再有任何的需要。相反，您只需使用以下命令。
 
 ----
 $ gradle wrapper --gradle-version 2.13
 ----
 
-After this task completes, you will notice a few new files. The two scripts are in the root of the folder, while the wrapper jar and properties files have been added to a new `gradle/wrapper` folder.
+完成此任务后，您将注意到一些新文件。这两个脚本在文件夹的根目录，而包装器 jar和属性文件已被添加到一个新的 `gradle/wrapper` 文件夹中。
 
     └── <project folder>
         └── gradlew
@@ -240,15 +240,15 @@ After this task completes, you will notice a few new files. The two scripts are 
                 └── gradle-wrapper.jar
                 └── gradle-wrapper.properties
 
-The Gradle Wrapper is now available for building your project. Add it to your version control system, and everyone that clones your project can build it just the same. It can be used in the exact same way as an installed version of Gradle. Run the wrapper script to perform the build task, just like you did previously:
+Gradle Wrapper现在可以建立自己的项目。将其添加到版本控制系统中，克隆项目的每个人都可以构建相同的版本控制系统。它可以用在相同的方式作为一个安装版的Gradle。运行包装器脚本来执行构建任务，就像您以前做的那样：
 
 ----
 ./gradlew build
 ----
 
-The first time you run the wrapper for a specified version of Gradle, it downloads and caches the Gradle binaries for that version. The Gradle Wrapper files are designed to be committed to source control so that anyone can build the project without having to first install and configure a specific version of Gradle.
+当您第一次运行一个指定的版本的Gradle包装器，它会下载和缓存那个版本的Gradle二进制文件。Gradle封装器文件的目的是致力于源控制，任何人都可以无需先安装和配置一个特定版本的Gradle来构建项目。
 
-At this stage, you will have built your code. You can see the results here:
+在这个阶段，您将构建代码。你可以在这里看到结果：
 
 ----
 build
@@ -265,7 +265,7 @@ build
         └── MANIFEST.MF
 ----
 
-Included are the two expected class files for `Greeter` and `HelloWorld`, as well as a JAR file. Take a quick peek:
+包括两个预期的类文件 `Greeter` 和 `HelloWorld` ，以及一个JAR文件。匆匆一瞥：
 
 ----
 $ jar tvf build/libs/gs-gradle-0.1.0.jar
@@ -276,9 +276,9 @@ $ jar tvf build/libs/gs-gradle-0.1.0.jar
 988 Fri May 30 16:02:32 CDT 2014 hello/HelloWorld.class
 ----
 
-The class files are bundled up. It's important to note, that even though you declared joda-time as a dependency, the library isn't included here. And the JAR file isn't runnable either.
+类文件被捆绑起来。重要的是要注意，即使你宣布Joda Time作为一个依赖，库不包括在这里。JAR文件也不会运行。
 
-To make this code runnable, we can use gradle's `application` plugin. Add this to your `build.gradle` file.
+使代码可运行，我们可以使用Gradle的 `application` 插件。添加到您的 `build.gradle` 文件。
 
 ----
 apply plugin: 'application'
@@ -286,7 +286,7 @@ apply plugin: 'application'
 mainClassName = 'hello.HelloWorld'
 ----
 
-Then you can run the app!
+然后你可以运行应用程序！
 
 ----
 $ ./gradlew run
@@ -319,11 +319,11 @@ them in your production build file.
 
 == 总结
 
-Congratulations! You have now created a simple yet effective Gradle build file for building Java projects.
+祝贺你!你已经为构建java项目创建了一个简单而有效的Gradle项目定义。
 
 == 参考
 
-The following guide may also be helpful:
+下面的指南可能也有帮助：
 
 * http://knos.top/guides/gs/maven/[使用Maven构建Java项目]
 
