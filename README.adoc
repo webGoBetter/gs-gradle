@@ -53,21 +53,21 @@ include::initial/src/main/java/hello/Greeter.java[]
 
 现在，你已经为Gradle构建准备了一个项目，下一步就是安装Gradle。
 
-It's highly recommended to use an installer:
+这是强烈建议使用安装程序:
 * http://sdkman.io/
-* Home brew (brew install gradle)
+* Home brew (通过brew安装gradle)
 
-As a last resort, if neither of these tools suit your needs, you can download the binaries from http://www.gradle.org/downloads. Only the binaries are required, so look for the link to gradle-_version_-bin.zip. (You can also choose gradle-_version_-all.zip to get the sources and documentation as well as the binaries.)
+作为最后的手段，如果这些工具都不能满足你的需要，你可以从http://www.gradle.org/downloads下载二进制文件。只有二进制文件是必需的，所以找链接 gradle-_version_-bin.zip 。（你也可以选择 gradle-_version_-all.zip 得到源文件以及二进制文件。）
 
-Unzip the file to your computer, and add the bin folder to your path.
+解压文件到您的计算机，然后加入 _bin_ 文件夹到你的路径。Unzip the file to your computer, and add the bin folder to your path.
 
-To test the Gradle installation, run Gradle from the command-line:
+测试Gradle的安装，在命令行运行Gradle ：
 
 ----
 gradle
 ----
 
-If all goes well, you see a welcome message:
+如果一切顺利，你看到一个欢迎信息：
 
 ....
 :help
@@ -85,17 +85,17 @@ BUILD SUCCESSFUL
 Total time: 2.675 secs
 ....
 
-You now have Gradle installed.
+你现在已经完成了Gradle的安装。
 
 
-== Find out what Gradle can do
-Now that Gradle is installed, see what it can do. Before you even create a build.gradle file for the project, you can ask it what tasks are available:
+== 发现Gradle能做什么
+现在安装好了Gradle，看它能做什么。甚至在你为项目创建一个build.gradle文件之前，你都可以问它什么任务是可用的：
 
 ----
 gradle tasks
 ----
 
-You should see a list of available tasks. Assuming you run Gradle in a folder that doesn't already have a _build.gradle_ file, you'll see some very elementary tasks such as this:
+你应该看到一列可用的任务。假设你在一个没有 _build.gradle_ 文件的文件夹中运行，你会看到一些非常基本的任务，像这样：
 
 ....
 :tasks
@@ -120,9 +120,9 @@ BUILD SUCCESSFUL
 Total time: 3.077 secs
 ....
 
-Even though these tasks are available, they don't offer much value without a project build configuration. As you flesh out the `build.gradle` file, some tasks will be more useful. The list of tasks will grow as you add plugins to `build.gradle`, so you'll occasionally want to run **tasks** again to see what tasks are available.
+即使这些任务是可用的，但没有项目构建配置，它们也不会提供太多的价值。当你写出 `build.gradle` 文件，一些任务会更有用。当你添加插件到 `build.gradle` 时，任务列表会增长，所以你会偶尔想再次运行 **tasks** 看有什么可用任务。
 
-Speaking of adding plugins, next you add a plugin that enables basic Java build functionality.
+说到添加插件，下一步你添加一个插件，启用基本的java构建功能。
 
 
 == Build Java code
